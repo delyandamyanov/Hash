@@ -1,0 +1,47 @@
+﻿@model PasswordHashing.Models.Hasher
+
+@{
+    ViewData["Title"] = "Hasher";
+}
+
+<div class="well" style="margin-top: 10px">
+    @using (Html.BeginForm("GetHash", "Home", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <fieldset>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    @Html.DropDownListFor(model => model.Algorithm,
+                                                   new[] {
+                                    new SelectListItem { Text = "SHA1", Value = "SHA1" },
+                                    new SelectListItem { Text = "SHA256", Value = "SHA256" },
+                                    new SelectListItem { Text = "SHA512", Value = "SHA512" },
+                                                   }, new { @class = "form-control" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="form-group" style="margin-top: 10px; width:100%">
+                <div class="col-lg-12" style="width:100%">
+                    Password: @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @style="width: 100%" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="form-group" style="margin-top: 10px; width:100%">
+                <div class="col-lg-12">
+                    Hash Value: @Html.TextBoxFor(model => model.HashedPassword, null, new { @class = "form-control", @style = "width: 100%" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="form-group" style="margin-top: 10px; width:100%">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-success">Get Hash</button>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
